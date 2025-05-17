@@ -7,4 +7,4 @@ server:
 
 
 accounts:
-    host: http://localhost:8083/accounts/v1/suppliers
+    host: ${ACCOUNTS_API_URI:http://localhost:8083/accounts/v1/suppliers}
