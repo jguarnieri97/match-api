@@ -1,7 +1,6 @@
 package ar.edu.unlam.tpi.match_api.service.impl;
 
 import org.springframework.stereotype.Service;
-
 import ar.edu.unlam.tpi.match_api.client.AccountsClient;
 import ar.edu.unlam.tpi.match_api.service.MatchService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class MatchServiceImpl implements MatchService {
-    // Implement the methods defined in the SupplierService interface here
     private final AccountsClient accountsClient;
 
     @Override
