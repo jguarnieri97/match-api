@@ -1,4 +1,4 @@
-package ar.edu.unlam.tpi.match_api.dto;
+package ar.edu.unlam.tpi.match_api.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package ar.edu.unlam.tpi.match_api.dto;
+package ar.edu.unlam.tpi.match_api.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,13 +23,7 @@ public class SupplierResponseDto {
     private String type;
     private GeolocationResponseDto geolocation;
     private Float score;
-    
-
-    private CompanyResponseTypeDto companyType;
-
     private Float avgPrice;
-
     private Integer commentsCount;
-
     private Boolean isVerified;
 }
