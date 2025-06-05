@@ -1,5 +1,6 @@
 package ar.edu.unlam.tpi.match_api.service;
-import ar.edu.unlam.tpi.match_api.dto.SupplierResponseDto;
+import ar.edu.unlam.tpi.match_api.dto.response.SupplierDetailResponse;
+
 import java.util.List;
 
 /**
@@ -10,5 +11,5 @@ public interface MatchService {
      * Obtiene la lista de proveedores.
      * @return Lista de proveedores.
      */
-    public List<SupplierResponseDto> getSuppliers();
+    public List<SupplierDetailResponse> getSuppliers(String category, Float lat, Float ln);
 }
