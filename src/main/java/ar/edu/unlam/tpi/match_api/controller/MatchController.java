@@ -1,11 +1,15 @@
 package ar.edu.unlam.tpi.match_api.controller;
 
+import ar.edu.unlam.tpi.match_api.dto.response.RecommendationDetailResponse;
+import ar.edu.unlam.tpi.match_api.dto.response.SupplierDetailResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import ar.edu.unlam.tpi.match_api.dto.GenericResponse;
-import ar.edu.unlam.tpi.match_api.dto.SupplierResponseDto;
+import ar.edu.unlam.tpi.match_api.dto.response.GenericResponse;
+
 import java.util.List;
 
 /**
@@ -21,5 +25,17 @@ public interface MatchController {
      */
     @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
-    GenericResponse<List<SupplierResponseDto>> getSuppliers();
+    @Operation(summary = "Get all suppliers")
+    GenericResponse<List<SupplierDetailResponse>> getSuppliers(@RequestParam(required = false) String category,
+                                                               @RequestParam(required = false) Float lat,
+                                                               @RequestParam(required = false) Float ln);
+
+    @GetMapping("/recommendations")
+    @ResponseStatus(HttpStatus.OK)
+    GenericResponse<List<RecommendationDetailResponse>> getRecommendations(
+            @RequestParam Long applicantId,
+            @RequestParam(required = false, defaultValue = "3") int limit,
+            @RequestParam Float lat,
+            @RequestParam Float ln
+    );
 }
