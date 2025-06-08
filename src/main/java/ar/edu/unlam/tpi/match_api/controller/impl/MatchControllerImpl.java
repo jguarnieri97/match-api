@@ -1,5 +1,6 @@
 package ar.edu.unlam.tpi.match_api.controller.impl;
 
+import ar.edu.unlam.tpi.match_api.dto.response.RecommendationDetailResponse;
 import ar.edu.unlam.tpi.match_api.dto.response.SupplierDetailResponse;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,15 @@ public class MatchControllerImpl implements MatchController {
         return GenericResponse.<List<SupplierDetailResponse>>builder()
                 .code(STATUS_OK)
                 .data(suppliers)
+                .message(SUCCESS_MESSAGE)
+                .build();
+    }
+
+    @Override
+    public GenericResponse<List<RecommendationDetailResponse>> getRecommendations(Long applicantId, int limit, Float lat, Float ln) {
+        return GenericResponse.<List<RecommendationDetailResponse>>builder()
+                .code(STATUS_OK)
+                .data(matchService.getRecommendations(applicantId, limit, lat, ln))
                 .message(SUCCESS_MESSAGE)
                 .build();
     }
