@@ -1,6 +1,7 @@
 package ar.edu.unlam.tpi.match_api.service.impl;
 
 import ar.edu.unlam.tpi.match_api.dto.response.SupplierDetailResponse;
+import ar.edu.unlam.tpi.match_api.utils.CompanyTypeEnum;
 import ar.edu.unlam.tpi.match_api.utils.Converter;
 import ar.edu.unlam.tpi.match_api.utils.SupplierConverter;
 import ar.edu.unlam.tpi.match_api.client.RecommendationClient;
@@ -36,22 +37,22 @@ public class MatchServiceImpl implements MatchService {
     public List<RecommendationDetailResponse> getRecommendations(Long applicantId, int limit, Float lat, Float ln) {
         List<RecommendationResponse> recommendations = recommendationClient.get(applicantId, limit);
 
-        if (recommendations.isEmpty()) {
-            recommendations = List.of(
-                    RecommendationResponse.builder().category("ELECTRICIAN").build(),
-                    RecommendationResponse.builder().category("CONTRACTOR").build(),
-                    RecommendationResponse.builder().category("CLEANING").build()
-            );
-        }
-
         List<SupplierResponseDto> result = new ArrayList<>();
 
-        for (RecommendationResponse recommendation : recommendations) {
-            List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(recommendation.getCategory(), lat, ln);
-            if (!suppliers.isEmpty()) {
-                result.add(suppliers.get(0));
+        if (recommendations.isEmpty()) {
+            List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(CompanyTypeEnum.CLEANING.name(), lat, ln);
+            for (int i = 0; i < Math.min(3, suppliers.size()); i++) {
+                result.add(suppliers.get(i));
+            }
+        } else {
+            for (RecommendationResponse recommendation : recommendations) {
+                List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(recommendation.getCategory(), lat, ln);
+                if (!suppliers.isEmpty()) {
+                    result.add(suppliers.get(0));
+                }
             }
         }
+
         return Converter.toRecommendationDetailList(result);
     }
 

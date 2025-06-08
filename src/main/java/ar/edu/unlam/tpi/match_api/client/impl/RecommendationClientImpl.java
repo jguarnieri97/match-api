@@ -5,8 +5,6 @@ import ar.edu.unlam.tpi.match_api.client.error.ErrorHandler;
 import ar.edu.unlam.tpi.match_api.dto.response.ErrorResponseDto;
 import ar.edu.unlam.tpi.match_api.dto.response.GenericResponse;
 import ar.edu.unlam.tpi.match_api.dto.response.RecommendationResponse;
-import ar.edu.unlam.tpi.match_api.exceptions.AccountClientException;
-import ar.edu.unlam.tpi.match_api.exceptions.RecommendationClientException;
 import ar.edu.unlam.tpi.match_api.utils.annotations.WebHttpClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -50,20 +47,4 @@ public class RecommendationClientImpl implements RecommendationClient {
                 .map(GenericResponse::getData)
                 .block();
     }
-
-    public Mono<Throwable> handle4xxError(ErrorResponseDto error) {
-        log.error("Error del cliente externo: {}", error);
-        return Mono.error(new RecommendationClientException(error));
-    }
-
-    public Mono<Throwable> handle5xxError(ErrorResponseDto error) {
-        log.error("Error del servidor externo: {}", error);
-        return Mono.error(new RecommendationClientException(error));
-    }
-
-    public boolean onClientError(Throwable e) {
-        log.error("Error al ejecutar el request: {}", e.getMessage());
-        throw new AccountClientException(e.getMessage());
-    }
-
 }
