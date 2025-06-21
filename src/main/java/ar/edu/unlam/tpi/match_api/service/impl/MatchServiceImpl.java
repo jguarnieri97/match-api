@@ -26,8 +26,8 @@ public class MatchServiceImpl implements MatchService {
     private final RecommendationClient recommendationClient;
 
     @Override
-    public List<SupplierDetailResponse> getSuppliers(String category, Float lat, Float ln) {
-        List<SupplierResponseDto> suppliersResponse = accountsClient.getSuppliers(category, lat, ln);
+    public List<SupplierDetailResponse> getSuppliers(String category, Float lat, Float ln, String workResume) {
+        List<SupplierResponseDto> suppliersResponse = accountsClient.getSuppliers(category, lat, ln, workResume);
         return suppliersResponse.stream()
                 .map(s -> SupplierConverter.toDetailResponse(s, lat, ln))
                 .toList();
@@ -40,13 +40,13 @@ public class MatchServiceImpl implements MatchService {
         List<SupplierResponseDto> result = new ArrayList<>();
 
         if (recommendations.isEmpty()) {
-            List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(CompanyTypeEnum.CLEANING.name(), lat, ln);
+            List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(CompanyTypeEnum.CLEANING.name(), lat, ln, null);
             for (int i = 0; i < Math.min(3, suppliers.size()); i++) {
                 result.add(suppliers.get(i));
             }
         } else {
             for (RecommendationResponse recommendation : recommendations) {
-                List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(recommendation.getCategory(), lat, ln);
+                List<SupplierResponseDto> suppliers = accountsClient.getSuppliers(recommendation.getCategory(), lat, ln, null);
                 if (!suppliers.isEmpty()) {
                     result.add(suppliers.get(0));
                 }
