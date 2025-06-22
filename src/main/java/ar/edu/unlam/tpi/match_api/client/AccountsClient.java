@@ -13,5 +13,5 @@ public interface AccountsClient {
      *
      * @return Lista de proveedores
      */
-    List<SupplierResponseDto> getSuppliers(String category, Float lat, Float ln);
+    List<SupplierResponseDto> getSuppliers(String category, Float lat, Float ln, String workResume );
 }

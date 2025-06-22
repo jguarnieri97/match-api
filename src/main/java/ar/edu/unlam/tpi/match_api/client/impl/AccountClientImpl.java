@@ -32,7 +32,7 @@ public class AccountClientImpl implements AccountsClient{
 
     // Usa directamente el host completo y agrega los query params manualmente
     @Override
-    public List<SupplierResponseDto> getSuppliers(String category, Float lat, Float ln) {
+    public List<SupplierResponseDto> getSuppliers(String category, Float lat, Float ln, String workResume) {
         StringBuilder url = new StringBuilder(host);
         boolean hasParam = false;
         if (category != null) {
@@ -45,6 +45,9 @@ public class AccountClientImpl implements AccountsClient{
         }
         if (ln != null) {
             url.append(hasParam ? "&" : "?").append("ln=").append(ln);
+        }
+        if (workResume != null) {
+            url.append(hasParam ? "&" : "?").append("workResume=").append(workResume);
         }
 
         return webClient.get()

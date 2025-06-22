@@ -19,13 +19,13 @@ public class MatchControllerImpl implements MatchController {
     private final MatchService matchService;
 
     @Override
-    public GenericResponse<List<SupplierDetailResponse>> getSuppliers(String category, Float lat, Float ln) {
-        List<SupplierDetailResponse> suppliers = matchService.getSuppliers(category, lat, ln);
+    public GenericResponse<List<SupplierDetailResponse>> getSuppliers(String category, Float lat, Float ln, String workResume) {
+        List<SupplierDetailResponse> suppliers = matchService.getSuppliers(category, lat, ln, workResume);
         return GenericResponse.<List<SupplierDetailResponse>>builder()
                 .code(STATUS_OK)
                 .data(suppliers)
                 .message(SUCCESS_MESSAGE)
-                .build();
+                .build();   
     }
 
     @Override

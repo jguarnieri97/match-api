@@ -24,13 +24,14 @@ class MatchControllerImplTest {
         String category = "comida";
         Float lat = -34.6f;
         Float ln = -58.4f;
+        String workResume = "wall_repair";
         SupplierDetailResponse supplier = SupplierDetailResponse.builder().build();
         List<SupplierDetailResponse> mockSuppliers = List.of(supplier);
 
-        when(matchService.getSuppliers(category, lat, ln)).thenReturn(mockSuppliers);
+        when(matchService.getSuppliers(category, lat, ln, workResume)).thenReturn(mockSuppliers);
 
         // When
-        GenericResponse<List<SupplierDetailResponse>> response = controller.getSuppliers(category, lat, ln);
+        GenericResponse<List<SupplierDetailResponse>> response = controller.getSuppliers(category, lat, ln, workResume);
 
         // Then
         assertThat(response.getCode()).isEqualTo(200);
