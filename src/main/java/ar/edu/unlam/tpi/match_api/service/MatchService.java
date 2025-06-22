@@ -12,7 +12,7 @@ public interface MatchService {
      * Obtiene la lista de proveedores.
      * @return Lista de proveedores.
      */
-    public List<SupplierDetailResponse> getSuppliers(String category, Float lat, Float ln);
+    public List<SupplierDetailResponse> getSuppliers(String category, Float lat, Float ln, String workResume);
 
     /**
      * Obtiene recomendaciones basadas en el ID del solicitante, límite y coordenadas.

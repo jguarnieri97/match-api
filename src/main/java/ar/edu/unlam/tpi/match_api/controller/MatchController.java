@@ -28,7 +28,8 @@ public interface MatchController {
     @Operation(summary = "Get all suppliers")
     GenericResponse<List<SupplierDetailResponse>> getSuppliers(@RequestParam(required = false) String category,
                                                                @RequestParam(required = false) Float lat,
-                                                               @RequestParam(required = false) Float ln);
+                                                               @RequestParam(required = false) Float ln,
+                                                               @RequestParam(required = false) String workResume);
 
     @GetMapping("/recommendations")
     @ResponseStatus(HttpStatus.OK)

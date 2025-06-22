@@ -32,10 +32,10 @@ public class MatchServiceImplTest {
                 .build();
         List<SupplierResponseDto> supplierList = List.of(supplier);
 
-        when(accountsClient.getSuppliers("cat", 10.0f, 20.0f)).thenReturn(supplierList);
+        when(accountsClient.getSuppliers("cat", 10.0f, 20.0f, "wall_repair")).thenReturn(supplierList);
 
         // when
-        List<SupplierDetailResponse> result = matchService.getSuppliers("cat", 10.0f, 20.0f);
+        List<SupplierDetailResponse> result = matchService.getSuppliers("cat", 10.0f, 20.0f, "wall_repair");
 
         // then
         assertEquals(1, result.size());
