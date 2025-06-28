@@ -1,0 +1,13 @@
+
+spring:
+  application:
+    name: match-api
+server:
+    port: 8082
+
+
+accounts:
+    host: ${ACCOUNTS_API_URI:http://localhost:8083/accounts/v1/suppliers}
+
+recommendation:
+   host: ${RECOMMENDATION_API_URI:http://localhost:8089/recomendation-api/v1/recommendations}
